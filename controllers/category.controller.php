@@ -4,7 +4,6 @@ class ControllerCategory{
         $categories = CategoriesModel::get($condition);
         return $categories;
     }
-    public function ctr
     public function ctrAllCategories() {
         $categories = CategoriesModel::all();
         return $categories;
@@ -17,7 +16,7 @@ class ControllerCategory{
             if (!$category):
                 $name =  Generales::sanar_datos($_POST["name"],'string', $errores, 'nombre');
                 $description =  Generales::sanar_datos($_POST["description"],'string', $errores, 'descripcion');       
-                $photo = Generales::foto($_FILES["photo"],"./views/style1/img/users/", $errores);
+                $photo = Generales::foto($_FILES["photo"],"./views/style1/img/categories/", $errores);
                 
                 $datos = compact('name','description', 'photo');
                 
@@ -27,7 +26,7 @@ class ControllerCategory{
                                 'Insertada!',
                                 'Se ha registrado la categoria ".$name." en el sistema.',
                                 'success'
-                            ).then( () => window.location='login');
+                            ).then( () => window.location='menu');
                          </script>"; 
                 else:
                     echo "<script>
@@ -51,13 +50,13 @@ class ControllerCategory{
     }
     public function ctrUpdateCategories() {
         if($_SERVER['REQUEST_METHOD'] === 'POST'){     
-            echo "hola";
             $id = $_POST["id"];
+
             $name =  Generales::sanar_datos($_POST["name"],'string', $errores, 'nombre');
-            $description =  Generales::sanar_datos($_POST["description"],'string', $errores, 'descripcion');        
-            $photo = Generales::foto($_FILES["photo"],"./views/style1/img/users/", $errores);
-            var_dump($_POST);
-            $datos = compact('name','description', 'photo');
+            $description =  Generales::sanar_datos($_POST["description"],'string', $errores, 'descripcion');       
+            $photo = Generales::foto($_FILES["photo"],"./views/style1/img/categories/", $errores);
+            
+            $datos = compact('name','description','photo');
             
             if(CategoriesModel::update($datos, $id)):                  
                 echo "<script>
@@ -65,13 +64,13 @@ class ControllerCategory{
                             'Actualizada!',
                             'Se ha actualizado la categoria ".$name." en el sistema.',
                             'success'
-                        ).then( () => window.location='menu');
+                        ).then(() => window.location='menu');
                         </script>"; 
             else:
                 echo "<script>
                         Swal.fire(
                             'Oops...!',
-                            'Esa categoria no existe en nuestro sistema.',
+                            'Esa categoria no existe en nuestro sistemaa.',
                             'error'
                         );
                     </script>"; 
@@ -105,7 +104,7 @@ class ControllerCategory{
                 echo "<script>
                         Swal.fire(
                             'Oops...!',
-                            'Esa categoria no existe en nuestro sistema.',
+                            'Esa categoria no existe en nuestro sistema.'".$condicion.",
                             'error'
                         );
                     </script>"; 

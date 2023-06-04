@@ -656,6 +656,7 @@ ol {
 .signup-form textarea,
 .contact-form input[type=text],
 .contact-form input[type=email],
+.contact-form input[type=file],
 .contact-form textarea {
 	height: 57px;
 	width: 100%;
@@ -672,16 +673,13 @@ ol {
 .signup-form input[type=email]:focus,
 .signup-form textarea:focus,
 .contact-form input[type=text]:focus,
+.contact-form input[type=file]:focus,
 .contact-form input[type=email]:focus,
 .contact-form textarea:focus {
 	border-bottom: 2px solid #d82a4e;
 }
 
 .signup-form input[type=file],
-.contact-form input[type=file] {
-	display: none;
-}
-
 .signup-form textarea,
 .contact-form textarea {
 	padding-top: 23px;

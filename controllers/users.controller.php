@@ -7,7 +7,7 @@ class ControllerUsers{
             $registros = UserModel::where("users",$condicion);
 
             $condicion = "name like 'visitor'";
-            $role_visitor = RolModel::where("roles",$condicion);
+            $role_visitor = RolModel::get($condicion);
             
             if(!$registros):
 
@@ -62,11 +62,17 @@ class ControllerUsers{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $query = "email like '".$_POST["email"]."'";
             $userBd = UserModel::where("users",$query);
-            if($userBd):
+            if ($userBd):
                 if(password_verify($_POST["password"], $userBd['password'])):
                     $_SESSION["user"] = $userBd;
                     $_SESSION["logged_message"] = true;
-                    echo "<script>window.location='home'</script>";
+                    if ($userBd):
+                        if($userBd['role_id']==1 or $userBd['role_id']==2):
+                            echo "<script>window.location='menu'</script>";
+                        else:
+                            echo "<script>window.location='home'</script>";
+                        endif;
+                    endif;
                 else:
                     $errors["login"] = "La contraseña introducida no es correcta";
                     return $errors;
