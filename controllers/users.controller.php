@@ -193,5 +193,11 @@ class ControllerUsers{
         $user = UserModel::all("users");
         return $user;
     }
+    public function getUsers($query){
+        if ($query == null) $query = 'SELECT * FROM users';
+        
+        $registros = UserModel::getUsers($query);
+        return $registros;
+    }
 
 }

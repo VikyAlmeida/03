@@ -1,5 +1,17 @@
-<section class="hero-section set-bg" data-setbg="views/style1/img/page-bg/1.jpg">
-    <div class="container">
+<style>
+	.div{
+		background-color: rgb(255, 255, 255,0.6);
+		text-align: center;
+		padding: 2em;
+		margin:0 auto;
+	}
+</style>
+
+<section class="hero-section set-bg"  style="background-image: url('./views/style1/img/page-bg/4.jpg');display: flex;align-items: center;">
+    <div class="container" style="margin:0 auto;">
+		<div class="div">
+			<h1>Ayamonte</h1>
+		</div>
     </div>
 </section>
 

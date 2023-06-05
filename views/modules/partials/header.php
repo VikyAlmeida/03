@@ -5,6 +5,10 @@
 		document.getElementById('btn-logout').innerHTML = message;
 	};
 </script>
+<?php
+	if ($_GET["route"]=="menu") $color = "blue";
+	else $color = "white";
+?>
 <header class="header-section">
 		<div class="container">
 			<div class="row">
@@ -20,23 +24,22 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-lg-8">
-								<nav class="main-menu">
+								<nav class="main-menu" >
 									<ul>
-										<li><a href="home">Home</a></li>
-										<li><a href="#">About us</a></li>
-										<li><a href="courses.html">Courses</a></li>
-										<li><a href="blog.html">News</a></li>
+										<li><a style="color:<?=$color?>" href="home">Home</a></li>
+										<li><a style="color:<?=$color?>" href="#">Categorias</a></li>
+										<li><a style="color:<?=$color?>" href="courses.html">Establecimientos</a></li>
 									</ul>
 								</nav>
 							</div>
-							<div class="col-lg-4">
+							<div class="col-lg-4" style="text-align:right;">
 								<?php
 									if (isset($_SESSION["user"])):
 										?>
-											<div class="btn-group" style="margin:0 auto;">
-												<button type="button" style="background-color: transparent;border:0px;" data-toggle="dropdown">
-													<p>
-														<img src="<?=$_SESSION["user"]["photo"]?>" alt="" style="width: 60px; height: 60px; border-radius: 100%; margin-right: 10px; margin-top: -1em; "/>
+											<div class="btn-group">
+												<button type="button" style="background-color: transparent;border:0px; color:white" data-toggle="dropdown">
+													<p style="color:<?=$color?>">
+														<img src="<?=$_SESSION["user"]["photo"]?>" alt="" style="width: 60px; height: 60px; border-radius: 100%; margin-right: 10px;"/>
 														<?=$_SESSION["user"]["username"]?>
 													</p>
 												</button>
