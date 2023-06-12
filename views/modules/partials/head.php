@@ -39,6 +39,17 @@
         font-size: 14px;
         background: #edf4f6;
     }
+	.input-form{
+	height: 57px;
+	width: 100%;
+	padding: 0 30px;
+	margin-bottom: 27px;
+	float: left;
+	border: none;
+	font-size: 14px;
+	font-weight: 500;
+	background: #edf4f6;
+}
 </style>
 
 </head>

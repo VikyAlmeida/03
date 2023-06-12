@@ -37,10 +37,9 @@
         public static function insert($datos) {
             $conexion = Conectar::conectate();
             $table = self::table;
-
             $consulta = "insert into ".$table." (name, description, AboutUs, category_id, owner, logo, tlf, email, web_site, slug) values (?,?,?,?,?,?,?,?,?,?)";
             $resultado = $conexion->prepare($consulta);
-            if($resultado->execute(array($datos["name"],$datos["description"],$datos["AboutUs"],$datos["category_id"],$datos["owner"],$datos["logo"],$datos["tlf"],$datos["email"],$datos["web_site"],$datos["slug"])))
+            if($resultado->execute(array($datos["name"],$datos["description"],$datos["aboutUs"],$datos["category"],$datos["owner"],$datos["logo"],$datos["tlf"],$datos["email"],$datos["url"],$datos["slug"])))
             {return true;}
             else
             {return false;}
@@ -69,7 +68,7 @@
         }
 
         public static function getEstablishment($query){            
-            $conexion = Conectar::conectate2();
+            $conexion = Conectar::conectate();
 
             $result = $conexion->query($query);
             if($result->rowCount()>1):

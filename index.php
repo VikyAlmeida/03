@@ -9,12 +9,14 @@ include('./controllers/category.controller.php');
 include('./controllers/establishment.controller.php');
 include('./controllers/rol.controller.php');
 include("./controllers/setions.controller.php");
+include("./controllers/style.controller.php");
 
 include('./models/users.model.php');
 include('./models/roles.model.php');
 include('./models/categories.model.php');
 include('./models/establishment.model.php');
 include("./models/sections.model.php");
+include("./models/style.model.php");
 
 session_start();
     $template = new ControllerTemplate();

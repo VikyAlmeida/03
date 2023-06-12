@@ -24,6 +24,10 @@
 			$establishment_json = json_encode($establishmentForMonth);
 
 ?>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <section class="categories-section spad">
 	<!-- menu del administrador -->
 	<div class="container" style="margin-top: 2em; margin-bottom:2em">
@@ -191,7 +195,7 @@
 						</div>
 						<div class="col-lg-12">
 							
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newCategory" style="margin-bottom: 1em;">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCategory" style="margin-bottom: 1em;">
 					<i class="fa fa-plus"></i> Crear nueva categoria
 				</button>
 				<div class="modal fade" id="newCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -199,7 +203,7 @@
 						<div class="modal-content">
 							<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLabel">Crear nueva categoria</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div class="modal-body" style="background-color: #d82a4e;">
 								<div>
@@ -229,7 +233,7 @@
 											position: relative;
 											color: #fff;
 											cursor: pointer;
-											background: #c2c2c2;" data-bs-dismiss="modal">Close</button>
+											background: #c2c2c2;" data-dismiss="modal">Close</button>
 											<?php
 												if(isset($_POST)):
 													if (isset($_POST["new"])):
@@ -264,7 +268,7 @@
 											<td><?= $category["description"] ?></td>
 											<td>
 												<div style="display:flex">
-													<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-category-<?=$category["id"]?>">
+													<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit-category-<?=$category["id"]?>">
 														<i class="fa fa-edit"></i>
 													</button> 
 													<form action="" method="post" style="margin-left:1em">
@@ -337,29 +341,6 @@
 		</div>
 	</div>
 </section>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- Modal -->
 <?php
 	if ($categories):
@@ -370,7 +351,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Editar categoria <?=$category["name"]?></h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body" style="background-color: #d82a4e;">
 							<div>
@@ -400,7 +381,7 @@
 										position: relative;
 										color: #fff;
 										cursor: pointer;
-										background: #c2c2c2;" data-bs-dismiss="modal">Close</button>
+										background: #c2c2c2;" data-dismiss="modal">Close</button>
 										<?php
 											if(isset($_POST)):
 												if (isset($_POST["update"])):
@@ -420,3 +401,6 @@
 		endforeach;
 	endif;
 ?>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

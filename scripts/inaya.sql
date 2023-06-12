@@ -95,12 +95,16 @@ insert into formats (format) values ('img');
 
 create table if not exists data (
     id int(10) primary key NOT NULL auto_increment,
-    datum varchar(255) not null unique,
-    format_id int(10),
+    datum varchar(255) not null,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp default CURRENT_TIMESTAMP,
-    constraint FK_format_data foreign key (format_id) references formats(id)
+    updated_at timestamp default CURRENT_TIMESTAMP
 );
+
+insert into data (id, datum) values (1, './views/style1/img/page-bg/4.jpg');
+insert into data (id, datum) values (2, 'Ayamonte paraiso de luz');
+insert into data (id, datum) values (3, 'Bienvenido a la comunidad!');
+insert into data (id, datum) values (4, 'Aqui se encuentran los establecimientos de Ayamonte divididos por categorias, registrate y disfruta de las ventajas de ser propietario de un establecimiento.');
+insert into data (id, datum) values (5, 'registrate ahora!');
 
 create table if not exists style_establishment (
     establishments_id int(10),
@@ -119,3 +123,31 @@ create table if not exists style_category (
     constraint FK_category_style foreign key (category_id) references categories(id),
     constraint FK_section_styleCategory foreign key (section_id) references sections(id)
 );
+
+create table if not exists sections_home(
+    id int(10) primary key NOT NULL auto_increment,
+    name varchar(255) not null unique,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp default CURRENT_TIMESTAMP             
+);
+
+insert into sections_home (name) values ('banner_img');
+insert into sections_home (name) values ('banner_txt');
+insert into sections_home (name) values ('registro_title');
+insert into sections_home (name) values ('registro_subtitle');
+insert into sections_home (name) values ('registro_btn');
+
+create table if not exists style_home (
+    sections_home int(10),
+    data int(10),
+    preview boolean default true,
+    constraint PK_category_section primary key (sections_home, data),
+    constraint FK_style_home_sections_home foreign key (sections_home) references sections_home(id),
+    constraint FK_style_home_data foreign key (data) references data(id)
+);
+
+insert into style_home (sections_home, data) values (1, 1);
+insert into style_home (sections_home, data) values (2, 2);
+insert into style_home (sections_home, data) values (3, 3);
+insert into style_home (sections_home, data) values (4, 4);
+insert into style_home (sections_home, data) values (5, 5);
