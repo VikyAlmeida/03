@@ -6,17 +6,20 @@
     $sectionController = new ControllerSection();
 
     $users = $userController->ctrAllUser();
-    $users_count = $userController->getUsers('SELECT role_id, count(role_id) as "usersByRole" FROM users group by role_id order by role_id');
-    $users_json = json_encode($users_count);
-    /*
-        $users_count[0]['role_id'] admin
-        $users_count[1]['role_id'] owner
-        $users_count[2]['role_id'] visitor
-    */ 
-
     $establishments = $establishmentController->ctrAllEstablishment();
     $categories = $categoryController->ctrAllCategories();
     $sections = $sectionController->ctrAllSections();
+
+	// estadisticas
+		//cards
+			$countEstablishments = count($establishments);
+			$newUsers24h = $userController->getUsers('SELECT count(*) as  newsUsers FROM users where date_format(TIMEDIFF(now(), created_at),"%H") <= 24')[0];
+			
+		//graficas
+			$usersByRole = $userController->getUsers('');
+			$sectionsByCategory = $categoryController->ctrGetCategoryByCondicion('');
+			
+
 ?>
 
 <section class="categories-section spad">
@@ -42,24 +45,24 @@
 					<div class="col-12">
 						<div class="container" style="display:flex;justify-content: space-between;">
 							<div class="card-stadistics">
-								<i class="fa fa-user-circle-o fa-3x" aria-hidden="true" style="margin:15px"></i>
+								<i class="fa fa-shopping-basket fa-3x" aria-hidden="true" style="margin:15px"></i>
 								<div>
-									<h2>Users</h2>
-									<p>250 <i class="fa fa-user-circle-o" aria-hidden="true" ></i></p>
+									<h2>Locales</h2>
+									<p><?= $countEstablishments ?> <i class="fa fa-shopping-cart" aria-hidden="true"></i></p>
 								</div>
 							</div>
 							<div class="card-stadistics">
-								<i class="fa fa-user-circle-o fa-3x" aria-hidden="true" style="margin:15px"></i>
+								<i class="fa fa-user-plus fa-3x" aria-hidden="true" style="margin:15px"></i>
 								<div>
-									<h2>Users</h2>
-									<p>250 <i class="fa fa-user-circle-o" aria-hidden="true" ></i></p>
+									<h2>Nuevos usuarios</h2>
+									<p><?= $newUsers24h ?> <i class="fa fa-user-circle-o" aria-hidden="true" ></i></p>
 								</div>
 							</div>
 							<div class="card-stadistics">
-								<i class="fa fa-user-circle-o fa-3x" aria-hidden="true" style="margin:15px"></i>
+								<i class="fa fa-pencil-square-o fa-3x" aria-hidden="true" style="margin:15px"></i>
 								<div>
-									<h2>Users</h2>
-									<p>250 <i class="fa fa-user-circle-o" aria-hidden="true" ></i></p>
+									<h2>Actualizacion</h2>
+									<p>250 <i class="fa fa-home" aria-hidden="true" ></i></p>
 								</div>
 							</div>
 						</div>

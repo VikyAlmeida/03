@@ -6,7 +6,7 @@
 		box-shadow: 2px 2px 2px 1px #0978e3;
 		width: 16.5em;
 		border-radius: 5px;
-		height: 100px;
+		height: 115px;
 		display: flex;
 		align-items: center;
 	}

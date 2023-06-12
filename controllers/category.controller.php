@@ -111,4 +111,11 @@ class ControllerCategory{
             endif;
         }
     }
+    public function ctrGetCategoryByCondicion($query) { 
+        if ($query == null) $query = 'SELECT * FROM category';
+        
+        $registros = CategoriesModel::getCategory($query);
+        return $registros;
+    }
+    
 }

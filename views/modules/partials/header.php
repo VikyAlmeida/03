@@ -27,8 +27,8 @@
 								<nav class="main-menu" >
 									<ul>
 										<li><a style="color:<?=$color?>" href="home">Home</a></li>
-										<li><a style="color:<?=$color?>" href="#">Categorias</a></li>
-										<li><a style="color:<?=$color?>" href="courses.html">Establecimientos</a></li>
+										<li><a style="color:<?=$color?>" href="categories">Categorias</a></li>
+										<li><a style="color:<?=$color?>" href="establishments">Establecimientos</a></li>
 									</ul>
 								</nav>
 							</div>
