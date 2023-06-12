@@ -112,7 +112,7 @@ class ControllerCategory{
         }
     }
     public function ctrGetCategoryByCondicion($query) { 
-        if ($query == null) $query = 'SELECT * FROM category';
+        if ($query == null) $query = 'SELECT * FROM categories';
         
         $registros = CategoriesModel::getCategory($query);
         return $registros;

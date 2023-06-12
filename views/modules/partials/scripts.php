@@ -57,13 +57,16 @@
 		const grafica2 = document.getElementById('myChart2');
 		const grafica3 = document.getElementById('myChart3');
 
+		const array_users = <?= $users_json ?>;
+		let data = [array_users[0].usersByRole, array_users[1].usersByRole];
+		
 		new Chart(grafica1,{
 			type:'doughnut',
 			data:{
 				labels:['Administrador','Propietario','Usuario'],
 				datasets:[{
 					label: 'num',
-					data: [1, 2, 3], 
+					data: data, 
 					backgroundColor: [
 						'hsla(347, 100%, 92%, 0.2)',
 						'rgba(54, 162, 235, 0.2)',
@@ -103,25 +106,40 @@
 				resposive:true
 			}
 		});
+		let i = 0;
+		let a = 0;
+		const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+		const date = new Date();
+		const threeMonthActuals = [ date.getMonth(), date.getMonth()-1<0?meses.length-1:date.getMonth()-1, date.getMonth()-2<0?meses.length-2:date.getMonth()-2 ];
+		const array_establishment = new Array(<?= $establishment_json ?>);
+		let result = array_establishment.map((value) => threeMonthActuals.indexOf(parseInt(value.mes,10)-1)>-1 ? value : false);
+		result = result.filter(value => value !== false);
+		result = threeMonthActuals.sort(( a, b ) => { return a - b; }).map((mes) => { 
+			a=i;
+			if (result[i]) {
+				if ((mes)+1 == result[i].mes) {
+					i++;
+					return result[a].establishemnByCreatedDate;
+				} else {
+					return 0;
+				}
+			}
+			return 0;
+		})
 		new Chart(grafica3, {
 			type: 'scatter',
 			data: {
-				labels: [
-					'January',
-					'February',
-					'March',
-					'April'
-				],
+				labels: [meses[threeMonthActuals[0]],meses[threeMonthActuals[1]],meses[threeMonthActuals[2]]],
 				datasets: [{
 					type: 'bar',
 					label: 'Bar Dataset',
-					data: [10, 20, 30, 40],
+					data: [result[0],result[1],result[2]],
 					borderColor: 'rgb(255, 99, 132)',
 					backgroundColor: 'rgba(255, 99, 132, 0.2)'
 				}, {
 					type: 'line',
 					label: 'Line Dataset',
-					data: [10, 50, 50, 50],
+					data: [result[0],result[1],result[2]],
 					fill: false,
 					borderColor: 'rgb(54, 162, 235)'
 				}]

@@ -72,7 +72,7 @@
             else{return false;}
         }
         public static function getCategory($query){            
-            $conexion = Conectar::conectate();
+            $conexion = Conectar::conectate2();
 
             $result = $conexion->query($query);
             if($result->rowCount()>1):

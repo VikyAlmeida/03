@@ -110,4 +110,10 @@ class ControllerEstablishment{
                 </script>"; 
         endif;
     }
+    public function ctrGetEstablishmentByCondicion($query) { 
+        if ($query == null) $query = 'SELECT * FROM establishments';
+        
+        $registros = EstablishmentModel::getEstablishment($query);
+        return $registros;
+    }
 }

@@ -67,4 +67,15 @@
             {return true;}
             else{return false;}
         }
+
+        public static function getEstablishment($query){            
+            $conexion = Conectar::conectate2();
+
+            $result = $conexion->query($query);
+            if($result->rowCount()>1):
+                return $result->fetchAll();
+            else:
+                return $result->fetch();
+            endif;
+        }
     }

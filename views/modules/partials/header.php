@@ -5,8 +5,9 @@
 		document.getElementById('btn-logout').innerHTML = message;
 	};
 </script>
+
 <?php
-	if ($_GET["route"]=="menu") $color = "blue";
+	if (isset($_GET["route"]) and $_GET["route"]=="menu") $color = "blue";
 	else $color = "white";
 ?>
 <header class="header-section">
@@ -27,8 +28,14 @@
 								<nav class="main-menu" >
 									<ul>
 										<li><a style="color:<?=$color?>" href="home">Home</a></li>
-										<li><a style="color:<?=$color?>" href="categories">Categorias</a></li>
 										<li><a style="color:<?=$color?>" href="establishments">Establecimientos</a></li>
+										<?php
+											if (isset($_SESSION["user"])):
+												?>
+												<li><a style="color:<?=$color?>" href="preview">Vista previa</a></li>
+												<?php
+											endif;
+										?>
 									</ul>
 								</nav>
 							</div>
@@ -45,7 +52,6 @@
 												</button>
 												<div class="dropdown-menu">
 													<a class="dropdown-item" href="home">Home</a>
-													<a class="dropdown-item" href="#">Editar perfil</a>
 													<a class="dropdown-item" href="menu">Menu</a>
 													<div class="dropdown-divider"></div>
 														<a class="dropdown-item" href="logout">Salir</a>

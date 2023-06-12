@@ -16,12 +16,14 @@
 			$newUsers24h = $userController->getUsers('SELECT count(*) as  newsUsers FROM users where date_format(TIMEDIFF(now(), created_at),"%H") <= 24')[0];
 			
 		//graficas
-			$usersByRole = $userController->getUsers('');
+			$usersByRole = $userController->getUsers('SELECT role_id, count(role_id) as "usersByRole" FROM users group by role_id');
 			$sectionsByCategory = $categoryController->ctrGetCategoryByCondicion('');
-			
+			$establishmentForMonth = $establishmentController->ctrGetEstablishmentByCondicion('SELECT count(id) as establishemnByCreatedDate, month(created_at) as mes FROM establishments e group by (month(created_at)) Order by created_at');
+
+			$users_json = json_encode($usersByRole);
+			$establishment_json = json_encode($establishmentForMonth);
 
 ?>
-
 <section class="categories-section spad">
 	<!-- menu del administrador -->
 	<div class="container" style="margin-top: 2em; margin-bottom:2em">
@@ -32,7 +34,6 @@
 					<li><a style="cursor:pointer; color: #4688C8;" onclick="getPartial('categories')">Categorias</a></li>
 					<li><a style="cursor:pointer; color: #4688C8;" onclick="getPartial('users')">Usuarios</a></li>
 					<li><a style="cursor:pointer; color: #4688C8;" onclick="getPartial('establishment')">Establecimientos</a></li>
-					<li><a style="cursor:pointer; color: #4688C8;" onclick="getPartial('formats')">Diseño del inicio</a></li>
 				</ul>
 			</div>
 		</div>
@@ -97,7 +98,7 @@
 													<h4 class="mb-0">
 														<span class="count">2</span>
 													</h4>
-													<p style='color:#4688C8'>Establecimientos</p>
+													<p style='color:#4688C8'>Categorias</p>
 												</div>
 												<div style="width:50%;justify-content:center">
 													<div id='container'>
@@ -116,7 +117,7 @@
 													<h4 class="mb-0">
 														<span class="count">3</span>
 													</h4>
-													<p style='color:#4688C8'>Members online</p>
+													<p style='color:#4688C8'>Nuevos locales</p>
 												</div>
 												<div style="width:50%;justify-content:center">
 													<div id='container'>
@@ -336,7 +337,29 @@
 		</div>
 	</div>
 </section>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Modal -->
 <?php
 	if ($categories):
