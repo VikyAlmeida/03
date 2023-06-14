@@ -28,6 +28,12 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	function configure(establishment) {
+		localStorage.setItem('establishmentConfigure', establishment);
+		location.href = 'previewEstablishment?'+establishment;
+	}
+</script>
 <section class="categories-section spad">
 	<!-- menu del administrador -->
 	<div class="container" style="margin-top: 2em; margin-bottom:2em">
@@ -221,6 +227,7 @@
 										<th>Nombre</th>
 										<th>Descripción</th>
 										<th>Contacto</th>
+										<th>Acciones</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -233,6 +240,30 @@
 														<td><?= $establishment["name"] ?></td>
 														<td><?= $establishment["description"] ?></td>
 														<td><?= $establishment["tlf"] ?></td>
+														<td>
+														<div style="display:flex">
+															<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit-establishment-<?=$establishment["id"]?>">
+																<i class="fa fa-edit"></i>
+															</button> 
+															<button type="button"  class="btn btn-info" style="margin-left:0.5em" onclick='configure(<?=$establishment["id"]?>)'>
+																<i class="fa fa-cogs"></i>
+															</button> 
+															<form action="" method="post" style="margin-left:0.5em">
+																<input type="hidden" name="id" value="<?=$establishment["id"]?>">
+																<input type="hidden" name="delete">
+																<button type="submit" class="btn btn-danger">
+																	<i class="fa fa-trash"></i>
+																</button>
+																<?php
+																	if(isset($_POST)):
+																		if (isset($_POST["delete"])):
+																			$establishmentController->ctrDeleteEstablishment();
+																		endif;
+																	endif;
+																?>
+															</form>
+																</div>
+														</td>
 													</tr>
 												<?php
 											endforeach;
@@ -249,35 +280,44 @@
 </section>
 <!-- Modal -->
 <?php
-	if ($categories):
-		foreach ($categories as $category):
+	if ($establishments):
+		foreach ($establishments as $establishment):
 			?>
-				<div class="modal fade" id="edit-category-<?=$category["id"]?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal fade" id="edit-establishment-<?=$establishment["id"]?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Editar categoria <?=$category["name"]?></h5>
-						<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+						<h5 class="modal-title" id="exampleModalLabel">Editar categoria <?=$establishment["name"]?></h5>
 						</div>
 						<div class="modal-body" style="background-color: #d82a4e;">
 							<div>
 								<form class="contact-form" action="" method="post" enctype="multipart/form-data">
-									<input type="text" name="name" placeholder="Nombre" value="<?=$category["name"]?>">
-									<textarea placeholder="Message" name="description"><?=$category["description"]?></textarea>
-									<input type="file" name="photo" id="">
-									<input type="hidden" name="id" value="<?=$category["id"]?>">
-									<?php
-										if (isset($sections)):
-											foreach($sections as $section):
-												?>
-													<input type="checkbox" name="<?=$section["name"]?>" id="" value="<?=$section["name"]?>">
-													<?=$section["name"]?>
-												<?php
-											endforeach;
-										endif;
-									?>
-									<button type="submit" class="site-btn">Guardar</button>
+									<input type="text" name="name" placeholder="Nombre" value="<?= $establishment['name'] ?>">
+									<input type="text" name="description" placeholder="Descripcion corta" value="<?= $establishment['description'] ?>">
+									<textarea placeholder="AboutUs" name="aboutUs"><?= $establishment['AboutUs'] ?></textarea>
+									<input type="file" name="photo" id="" placeholder="Logo">
+									<input type="text" name="tlf" id="" placeholder="Telefono"value="<?= $establishment['tlf'] ?>">
+									<input type="text" name="email" id="" placeholder="Email" value="<?= $establishment['email'] ?>">
+									<input type="text" name="web_site" id="" placeholder="Sitio web" value="<?= $establishment['web_site'] ?>">
+									<!-- <select name="category" id='category' class="input-form">
+										<option value="0">Selecciona una categoria</option>												
+										<?php
+											if (isset($categories)):
+												foreach($categories as $category):
+													if ($category['id'] === $establishment['category_id']): $selected = 'selected';
+													else: $selected = '';
+													endif;
+													?>
+														<option value="<?= $category['id'] ?>" <?= $selected ?>><?= $category['name'] ?></option>	
+													<?php
+												endforeach;
+											endif;
+										?>
+									</select> -->
 									<input type="hidden" name="update">
+									<input type="hidden" name="fotoAntes" value="<?= $establishment['logo'] ?>">
+									<input type="hidden" name="id" value="<?= $establishment['id'] ?>">
+									<button type="submit" class="site-btn">Guardar</button>
 									<button type="button" style="display: inline-block;
 										text-align: center;
 										border: none;
@@ -291,7 +331,8 @@
 										<?php
 											if(isset($_POST)):
 												if (isset($_POST["update"])):
-													$categoryController->ctrUpdateCategories();
+													$errores = $establishmentController->ctrUpdateEstablishment();
+													include('./views/modules/partials/errors_ul.php');
 												endif;
 											endif;
 										?>

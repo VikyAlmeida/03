@@ -1,8 +1,12 @@
 <?php
 class ControllerSection{
     public function ctrGetSections($condition) {
-        $Sections = SectionsModel::get($condition);
-        return $Sections;
+        try
+        {
+            $Sections = SectionsModel::get($condition);
+            return $Sections;
+        }
+        catch(PDOexception $e){ echo '<script>alert("'.$e->getMessage().'")</script>';echo $e->getMessage();}
     }
     public function ctrAllSections() {
         $Sections = SectionsModel::all();

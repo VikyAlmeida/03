@@ -30,7 +30,7 @@
 										<li><a style="color:<?=$color?>" href="home">Home</a></li>
 										<li><a style="color:<?=$color?>" href="establishments">Establecimientos</a></li>
 										<?php
-											if (isset($_SESSION["user"])):
+											if (isset($_SESSION["user"]) && $_SESSION["user"]['role_id'] === 1):
 												?>
 												<li><a style="color:<?=$color?>" href="preview">Vista previa</a></li>
 												<?php

@@ -60,11 +60,13 @@
             $conexion = Conectar::conectate();
             $table = self::table;
 
-            $consulta = "DELETE FROM ".$table." WHERE ?";
-            $resultado = $conexion->prepare($consulta);
-            if($resultado->execute(array($condition)))
-            {return true;}
-            else{return false;}
+            try
+            {
+                $consulta = "DELETE FROM ".$table." WHERE ". $condition;
+                if($conexion->query($consulta))
+                {return true;}
+            }
+            catch(PDOexception $e){ echo '<script>alert("'.$e->getMessage().'")</script>';echo $e->getMessage();}
         }
 
         public static function getEstablishment($query){            

@@ -163,7 +163,7 @@
 								document.write(`		</div>`)
 								document.write(`	</div>`)
 								document.write(`	<p>${elements[i].AboutUs}</p>`)
-								document.write(`	<a href="#" class="site-btn readmore">Read More</a>`)
+								document.write(`	<a href="establishment?${elements[i].id}" class="site-btn readmore">Read More</a>`)
 								document.write(`</div>`)
 							}
 						}

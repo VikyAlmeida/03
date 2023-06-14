@@ -82,6 +82,25 @@ create table if not exists sections(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp default CURRENT_TIMESTAMP             
 );
+insert into sections (name) values ('carruselTxt');
+insert into sections (name) values ('carruselImg');
+insert into sections (name) values ('aboutUsImg');
+insert into sections (name) values ('cuentaAtrasNum');
+insert into sections (name) values ('cuentaAtrasText');
+insert into sections (name) values ('servicesImg');
+insert into sections (name) values ('servicesTitle');
+insert into sections (name) values ('servicesTxt');
+insert into sections (name) values ('specialImg');
+insert into sections (name) values ('specialTitle');
+insert into sections (name) values ('specialPrice');
+insert into sections (name) values ('specialDescription');
+insert into sections (name) values ('trabajadoresTitle');
+insert into sections (name) values ('trabajadoresTxt');
+insert into sections (name) values ('trabajadoresImg');
+insert into sections (name) values ('blogTitle');
+insert into sections (name) values ('blogTxt');
+insert into sections (name) values ('blogImg');
+insert into sections (name) values ('reservar');
 
 create table if not exists formats (
     id int(10) primary key NOT NULL auto_increment,

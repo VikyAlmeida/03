@@ -3,9 +3,9 @@ class ControllerConst{
     public function getRoutes()
     {
         $routes = [
-            "public" => ["home", "categories", "establishments"],
+            "public" => ["home", "categories", "establishments", "establishment"],
             "login" => ["login", "register", "forgotPassword", "code"],
-            "private" => ["menu", "logout", "preview"]
+            "private" => ["menu", "logout", "preview", "previewEstablishment"]
         ];
         return $routes;
     }
