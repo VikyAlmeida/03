@@ -55,7 +55,6 @@ class ControllerStyle{
         $data = self::getDataById($data['data']);
         return $data;
     }
-
     public function validateDatum () {
         if($_SERVER['REQUEST_METHOD'] === 'POST'):
             $sectionController = new ControllerSection();
@@ -89,7 +88,6 @@ class ControllerStyle{
                  </script>"; 
         endif;
     }
-
     public static function addData($datum) {
         $id = StyleModel::addData($datum);
         return $id;
@@ -107,7 +105,6 @@ class ControllerStyle{
         $registros = StyleModel::getData($query);
         return $registros;
     }
-    
     public function deleteData(){
         if($_SERVER['REQUEST_METHOD'] === 'POST'): 
             foreach ($_POST['ids'] as $id) { 
@@ -151,5 +148,17 @@ class ControllerStyle{
             }
             catch(PDOexception $e){ echo '<script>alert("'.$e->getMessage().'")</script>';echo $e->getMessage();}
         endif;
+    }
+    public static function saveSectionsStyle($id){
+        if($_SERVER['REQUEST_METHOD'] === 'POST'):
+            $sections = $_POST['sections'];
+            if ($sections) {
+                for ($i=0; $i < count($sections); $i++) { 
+                    // guardar dependiendo si es category o establishment
+                    $data = StyleModel::saveStyle($sections[$i], $id);
+                    return $data['id'];
+                }
+            }
+        endif;   
     }
 }

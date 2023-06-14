@@ -4,6 +4,7 @@
     $categoryController = new ControllerCategory();
     $rolController = new ControllerRol();
     $sectionController = new ControllerSection();
+    $styleController = new ControllerStyle();
 
     $users = $userController->ctrAllUser();
     $establishments = $establishmentController->ctrAllEstablishment();
@@ -213,16 +214,23 @@
 										<input type="file" name="photo" id="">
 										<input type="hidden" name="id">
 										<input type="hidden" name="new">
+										
+										<div class="container">
+											<div class="row">
 										<?php
 											if (isset($sections)):
 												foreach($sections as $section):
 													?>
-														<input type="checkbox" name="<?=$section["name"]?>" id="" value="<?=$section["name"]?>">
+													<div class="col-6">
+														<input type="checkbox" name="sections[]" id="" value="<?=$section["id"]?>">
 														<?=$section["name"]?>
+													</div>
 													<?php
 												endforeach;
 											endif;
 										?>
+											</div>
+										</div><br><br>
 										<button type="submit" class="site-btn">Guardar</button>
 										<button type="button" style="display: inline-block;
 											text-align: center;
@@ -238,6 +246,8 @@
 												if(isset($_POST)):
 													if (isset($_POST["new"])):
 														$categoryController->ctrInsertCategories($errores);
+														$category = $categoryController->ctrGetCategoryByCondicion('SELECT * FROM categories order by id desc limit 1');
+														$styleController->saveSectionsStyle($category['id']);
 													endif;
 												endif;
 											?>
@@ -360,16 +370,22 @@
 									<textarea placeholder="Message" name="description"><?=$category["description"]?></textarea>
 									<input type="file" name="photo" id="">
 									<input type="hidden" name="id" value="<?=$category["id"]?>">
+									<div class="container">
+										<div class="row">
 									<?php
 										if (isset($sections)):
 											foreach($sections as $section):
 												?>
-													<input type="checkbox" name="<?=$section["name"]?>" id="" value="<?=$section["name"]?>">
-													<?=$section["name"]?>
+														<div class="col-6">
+															<input type="checkbox" name="<?=$section["name"]?>" id="" value="<?=$section["name"]?>">
+															<?=$section["name"]?>
+														</div>
 												<?php
 											endforeach;
 										endif;
 									?>
+									</div>
+								</div>
 									<button type="submit" class="site-btn">Guardar</button>
 									<input type="hidden" name="update">
 									<button type="button" style="display: inline-block;

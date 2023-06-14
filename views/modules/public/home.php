@@ -11,6 +11,7 @@
     $categoryController = new ControllerCategory();
     $establishmentController = new ControllerEstablishment();
     $userController = new ControllerUsers();
+    $styleController = new ControllerStyle();
 
     $firstCategories = $categoryController->ctrGetCategoryByCondicion('SELECT * FROM inaya2.categories order by created_at asc limit 6');
 	$categories = $categoryController->ctrAllCategories();
@@ -23,8 +24,13 @@
     $establishments_json = json_encode($establishments);
     $categories_json = json_encode($categories);
     $users_json = json_encode($users);
+	
+    $bannerImg = $styleController->mostrarHome(1);
+    $bannerTxt = $styleController->mostrarHome(2);
+    $registroTitle = $styleController->mostrarHome(3);
+    $registroSubtitle = $styleController->mostrarHome(4);
+    $registroBtn = $styleController->mostrarHome(5);
 ?>
-
 <script>
 		const categoryFilter  = localStorage.getItem('categoryFilter') || null;
 		const nameFilter  = localStorage.getItem('nameFilter') || null;
@@ -68,10 +74,10 @@
 			location.href = 'establishments';
 		}
 </script>
-<section class="hero-section set-bg"  data-setbg="./views/style1/img/page-bg/4.jpg" style="background-image: url('./views/style1/img/page-bg/4.jpg');display: flex;align-items: center;">
+<section class="hero-section set-bg"  data-setbg="./views/style1/img/page-bg/4.jpg" style="background-image: url(<?= $bannerImg['datum'] ?>);display: flex;align-items: center;">
     <div class="container" style="margin:0 auto;">
 		<div class="div">
-			<h1>Ayamonte</h1>
+			<h1><?= $bannerTxt['datum'] ?></h1>
 		</div>
     </div>
 </section>
@@ -214,14 +220,18 @@
 	<!-- course section end -->
 
 	<!-- banner section -->
+	
 	<section class="banner-section spad">
 		<div class="container">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changeRegistro" style="margin-bottom: 1em;">
+				<i class="fa fa-plus"></i> Cambiar registro
+			</button>
 			<div class="section-title mb-0 pb-2">
-				<h2>Bienvenido a la comunidad!</h2>
-				<p>Aqui se encuentran los establecimientos de Ayamonte divididos por categorias, registrate y disfruta de las ventajas de ser propietario de un establecimiento.</p>
+				<h2><?= $registroTitle['datum'] ?></h2>
+				<p><?= $registroSubtitle['datum'] ?></p>
 			</div>
 			<div class="text-center pt-5">
-				<a href="register" class="site-btn">Register Now</a>
+				<a href="register" class="site-btn"><?= $registroBtn['datum'] ?></a>
 			</div>
 		</div>
 	</section>

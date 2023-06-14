@@ -5,6 +5,7 @@
         const table1 = 'data';
         const table2 = 'style_home';
         const table3 = 'style_establishment';
+        const table4 = 'style_category';
         public static function lastId($table){
             $conexion = Conectar::conectate();
             try
@@ -129,5 +130,20 @@
                 else{return false;}
             }
             catch(PDOexception $e){ echo '<script>alert("'.$e->getMessage().'")</script>';echo $e->getMessage();}
+        }
+        public static function saveStyle($section, $id){
+            $conexion = Conectar::conectate();
+            $table = self::table4;
+
+            try
+            {
+                $consulta = "insert into ".$table." (category_id, sections_id) values (?,?)";
+                $resultado = $conexion->prepare($consulta);
+                if($resultado->execute(array($id, $section))){
+                    return true;
+                }
+            }
+            catch(PDOexception $e){ echo '<script>alert("'.$e->getMessage().'")</script>';echo $e->getMessage();}
+
         }
     }
